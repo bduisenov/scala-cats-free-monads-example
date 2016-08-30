@@ -49,7 +49,7 @@ class TemperatureServiceSpec
         }
       }
 
-      "stores valid temperatures in the repository" in {
+      "store valid temperatures in the repository" in {
         forAll { temperature: Temperature =>
           val service = new TemperatureService()(Validate.valid)
           val interpreter = new FakeInterpreter(Seq.empty)
@@ -61,7 +61,7 @@ class TemperatureServiceSpec
         }
       }
 
-      "fails to store invalid temperatures in the repository" in {
+      "fail to store invalid temperatures in the repository" in {
         forAll {
           (temperature: Temperature, range: QuantityRange[Temperature]) =>
             val error =
