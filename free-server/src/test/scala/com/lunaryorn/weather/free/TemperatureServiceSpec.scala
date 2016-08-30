@@ -64,11 +64,13 @@ class TemperatureServiceSpec
       "fails to store invalid temperatures in the repository" in {
         forAll {
           (temperature: Temperature, range: QuantityRange[Temperature]) =>
-            val error = TemperatureValidationError.TemperatureOutOfBoundsError(range)
+            val error =
+              TemperatureValidationError.TemperatureOutOfBoundsError(range)
             val service = new TemperatureService()(Validate.invalid(error))
             val interpreter = new FakeInterpreter(Seq.empty)
 
-            val result = service.addTemperature(temperature).foldMap(interpreter)
+            val result =
+              service.addTemperature(temperature).foldMap(interpreter)
 
             result mustBe Xor.left(TemperatureError.InvalidTemperature(error))
             interpreter.dispatchedActions mustBe empty

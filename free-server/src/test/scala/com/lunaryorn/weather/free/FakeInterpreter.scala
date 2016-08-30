@@ -22,7 +22,8 @@ import com.lunaryorn.weather.free.dsl.types.TemperatureAction
 import com.lunaryorn.weather.free.dsl.types.TemperatureAction.{GetAll, Store}
 import scala.collection.mutable
 
-class FakeInterpreter(temperatures: Seq[Temperature]) extends (TemperatureAction ~> Id) {
+class FakeInterpreter(temperatures: Seq[Temperature])
+    extends (TemperatureAction ~> Id) {
 
   val storedTemperatures = new mutable.Stack[Temperature]
   val dispatchedActions = new mutable.Stack[TemperatureAction[_]]
