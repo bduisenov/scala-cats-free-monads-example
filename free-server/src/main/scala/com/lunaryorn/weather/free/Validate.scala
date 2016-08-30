@@ -17,6 +17,7 @@
 package com.lunaryorn.weather.free
 
 import cats.data.Validated
+import cats.data.Validated.{Invalid, Valid}
 import com.lunaryorn.weather.{TemperatureValidationError, TemperatureValidator}
 import squants.Temperature
 
@@ -34,4 +35,12 @@ object Validate {
           t: Temperature
       ): Validated[TemperatureValidationError, Temperature] = v.validate(t)
     }
+
+  def valid[E, T]: Validate[E, T] = new Validate[E, T] {
+    override def validate(t: T): Validated[E, T] = Valid(t)
+  }
+
+  def invalid[E, T](error: E): Validate[E, T] = new Validate[E, T] {
+    override def validate(t: T): Validated[E, T] = Invalid(error)
+  }
 }
