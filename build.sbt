@@ -37,10 +37,6 @@ val commonSettings = Seq(
     // Fail compilation on warnings
     "-Xfatal-warnings"
   ),
-  libraryDependencies ++= Seq(
-    "org.scalatest" %% "scalatest" % "3.0.0" % "test",
-    "org.scalacheck" %% "scalacheck" % "1.13.2" % "test"
-  ),
   // Automatically update headers
   headers := createFrom(Apache2_0, "2016", "Sebastian Wiesner")
 )
@@ -51,7 +47,12 @@ val common = (project in file("common"))
   .settings(
     name := "weather-common",
     libraryDependencies ++= Seq(
-      "com.squants" %% "squants" % "0.6.2"
+      // Temperature types
+      "com.squants" %% "squants" % "0.6.2",
+      // Test framework
+      "org.scalatest" %% "scalatest" % "3.0.0" % "test",
+      // Property testing
+      "org.scalacheck" %% "scalacheck" % "1.13.2" % "test"
     ) ++ Dependencies.circe ++ Dependencies.finch ++ Dependencies.cats
   )
 
